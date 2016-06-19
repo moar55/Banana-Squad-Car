@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,8 +19,20 @@
         android:textSize="20dp"
         android:textColor="#fff"
         android:id="@+id/StartButton"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="50dp" />
+        android:layout_alignTop="@+id/ReverseButton"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/Direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Awaiting"
+        android:textSize="30dp"
+
+        android:layout_alignBottom="@+id/StartButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp"
+        android:textColor="#ff0000" />
 
     <Button android:layout_width="150dp"
         android:layout_height="150dp"
@@ -28,13 +40,11 @@
         android:text="Reverse"
         android:visibility="invisible"
         android:id="@+id/ReverseButton"
-        android:layout_below="@+id/StartButton"
-        android:layout_alignStart="@+id/StartButton"
-        android:layout_alignEnd="@+id/StartButton"
-        android:layout_gravity="center"
-        android:layout_marginBottom="45dp"
-        android:layout_marginLeft="200dp"
-        android:scrollHorizontally="false" />
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:scrollHorizontally="false"
+        android:textSize="20dp"
+        android:textColor="#fff" />
 
 
-</LinearLayout>
+</RelativeLayout>

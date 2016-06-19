@@ -6,5 +6,11 @@
         </shape>
     </item>
 
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#33ccff"/>
+        </shape>
+    </item>
+
 
 </selector>
