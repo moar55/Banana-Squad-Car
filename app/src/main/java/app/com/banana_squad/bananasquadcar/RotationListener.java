@@ -18,10 +18,12 @@ public class RotationListener implements SensorEventListener {
     private TextView directions;
     float [] gravity;
     float [] geomagnetic;
+    MainActivity mainActivity;
 
 
-    public RotationListener(TextView directions){
+    public RotationListener(TextView directions, MainActivity mainActivity){
         this.directions=directions;
+        this.mainActivity= mainActivity;
     }
 
     @Override
@@ -47,6 +49,15 @@ public class RotationListener implements SensorEventListener {
                 y = orientation[2];
                 directions.setText("Z: "+z+"\n X: "+x+"\n Y: "+y);
                 Log.v("Sensor","Success");
+
+               if(x>=1)
+                   mainActivity.send(2);
+
+                else if (x<=-1)
+                   mainActivity.send(1);
+
+                else
+                   mainActivity.send(0);
             }
             else
                 Log.e("Sensor","Failure!");
