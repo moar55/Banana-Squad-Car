@@ -121,12 +121,14 @@ public class BluetoothConnection extends  Thread {
              }
 
          public void send (int i){
+
              boolean sent = true;
              Log.v("Connection","In the send Method");
+             Log.v("Connection","Character to be sent is: "+ i);
              try{
-                 myOutputStream.write('d');
+                 myOutputStream.write(i);
              }
-             catch (IOException e){
+             catch (Exception e){
                  sent=false;
                  Log.e("Connection","error sending character "+ e.getMessage());
              }
@@ -137,8 +139,10 @@ public class BluetoothConnection extends  Thread {
 
              if(sent && success==0) {
                  success++;
+                 toast("Connection Established");
                  mainActivity.begin();
              }
+
 
          }
 

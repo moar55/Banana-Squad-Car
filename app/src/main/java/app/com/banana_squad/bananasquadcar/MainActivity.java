@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private final static int REQUEST_ENABLE_BT = 2;
     static char curentState;
     private String chosenDeviceName;
-    private BluetoothConnection connection = null;
+    private BluetoothConnection     connection = null;
     boolean deviceChoosen = false;
 
 
@@ -89,20 +90,35 @@ public class MainActivity extends AppCompatActivity {
                     background = ContextCompat.getDrawable(getBaseContext(), R.drawable.round_button);
                     start.setBackground(background);
                     reverse.setVisibility(View.INVISIBLE);
-                    mySensorManger.unregisterListener(mySensorListener);
-                    connection.closeAll();
+                    send('s');
+                    try {
+                        mySensorManger.unregisterListener(mySensorListener);
+                        connection.closeAll();
+                    }
+                    catch (Exception e){
+                        ;
+                    }
 
                 }
             }
         });
 
-        reverse.setOnClickListener(new View.OnClickListener() {
 
+        reverse.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                send(3);
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if(event.getAction()==MotionEvent.ACTION_DOWN)
+                    send('r');
+
+                else if(event.getAction()==MotionEvent.ACTION_UP)
+                    send('f');
+
+                return true;
             }
         });
+
+
 
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -115,10 +131,11 @@ public class MainActivity extends AppCompatActivity {
     public void begin() {
         mySensorManger.registerListener(mySensorListener, accSensor, SensorManager.SENSOR_DELAY_UI);
         mySensorManger.registerListener(mySensorListener, magSensor, SensorManager.SENSOR_DELAY_UI);
+
     }
 
     public void test() {
-        connection.getManageConnection().send(9);
+        connection.getManageConnection().send('f');
     }
 
     @Override
@@ -235,8 +252,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(myBroadcastReceiver);
-        connection.closeAll();
+
+        try {
+            unregisterReceiver(myBroadcastReceiver);
+            connection.closeAll();
+        }
+        catch (Exception e){
+            Log.e("Destroy","Error in closing stuff");
+        }
     }
 
     public void setBluetoothDevice() {
@@ -337,8 +360,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+        myBluetoothAdapter.disable();
+
+        if(connection!=null)
         connection.closeAll();
-        unregisterReceiver(myBroadcastReceiver);
+
+        try {
+            unregisterReceiver(myBroadcastReceiver);
+        }
+
+        catch (Exception e){
+            Log.e("Connection","I think the broadcast receiver isn't registered");
+        }
+
 
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -375,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (state) {
                     case BluetoothAdapter.STATE_TURNING_ON: toast("Enabling Bluetooth");break;
-                    case BluetoothAdapter.STATE_ON:  initiateBluetoothConnection('2');break;
+                    case BluetoothAdapter.STATE_ON:  showBtDevices();break;
                     case BluetoothAdapter.STATE_CONNECTED: toast("Connected");break;
                     case BluetoothAdapter.STATE_DISCONNECTED: toast("Connection Lost");break;
                     case BluetoothAdapter.STATE_OFF: toast("Bluetooth is turned off please enable it and try again")
