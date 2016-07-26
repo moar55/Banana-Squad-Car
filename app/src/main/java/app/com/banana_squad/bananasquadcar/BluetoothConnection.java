@@ -30,8 +30,8 @@ public class BluetoothConnection extends  Thread {
     ManageConnection manageConnection;
     int success =0;
 
-    public BluetoothConnection(char state, BluetoothAdapter myBluetoothAdapter, BluetoothDevice myBluetoothDevice, MainActivity mainActivity){
-        this.state = state;
+    public BluetoothConnection( BluetoothAdapter myBluetoothAdapter, BluetoothDevice myBluetoothDevice, MainActivity mainActivity){
+
         this.myBluetoothAdapter=myBluetoothAdapter;
         this.myBluetoothDevice=myBluetoothDevice;
         this.mainActivity = mainActivity;

@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private String chosenDeviceName;
     private BluetoothConnection     connection = null;
     boolean deviceChoosen = false;
+    private Button drawPath;
 
 
     @Override
@@ -82,10 +84,12 @@ public class MainActivity extends AppCompatActivity {
                     start.setBackground(background);
                     start.setText("Stop");
                     reverse.setVisibility(View.VISIBLE);
-                    initiateBluetoothConnection('T');
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                    initiateBluetoothConnection();
 
 
                 } else {
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                     start.setText("Start");
                     background = ContextCompat.getDrawable(getBaseContext(), R.drawable.round_button);
                     start.setBackground(background);
@@ -118,7 +122,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        drawPath=(Button)findViewById(R.id.drawPath);
 
+        drawPath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                initiateBluetoothConnection();
+                Intent mIntent = new Intent(getApplicationContext(),CreatePath.class);
+                startActivity(mIntent);
+            }
+        });
 
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -153,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         if (reverse.getVisibility() != View.INVISIBLE) {
             mySensorManger.registerListener(mySensorListener, accSensor, SensorManager.SENSOR_DELAY_UI);
             mySensorManger.registerListener(mySensorListener, magSensor, SensorManager.SENSOR_DELAY_UI);
-            initiateBluetoothConnection(curentState);
+            initiateBluetoothConnection();
         }
 
     }
@@ -184,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void initiateBluetoothConnection(char c) {
+    public void initiateBluetoothConnection() {
 
         if (!myBluetoothAdapter.isEnabled())
             myBluetoothAdapter.enable();
@@ -235,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                     chosenDeviceName = splittedName[0];
                     Log.v("Connetion", chosenDeviceName);
                     dialog.dismiss();
-                    initiateBluetoothConnection2('C');
+                    initiateBluetoothConnection2();
                 }
 
 
@@ -279,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
             toast("Cannot set device for connection check your connection or call a developer ");
     }
 
-    public void initiateBluetoothConnection2(char c) {
+    public void initiateBluetoothConnection2() {
         setBluetoothDevice();
 
         Log.v("Connection", "Started");
@@ -289,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
             Log.v("Connection WORKED :O ", "Started");
 
             try {
-                connection = new BluetoothConnection(c, myBluetoothAdapter, myBluetoothDevice, this);
+                connection = new BluetoothConnection(myBluetoothAdapter, myBluetoothDevice, this);
                 connection.start();
             } catch (Exception e) {
                 Log.e("Oh no!", e.getMessage());
@@ -303,11 +316,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-//    public void test(){
-//        connection.getManageConnection().send(2);
-//
-//    }
 
 
 
@@ -360,13 +368,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        myBluetoothAdapter.disable();
 
-        if(connection!=null)
-        connection.closeAll();
 
         try {
             unregisterReceiver(myBroadcastReceiver);
+            myBluetoothAdapter.disable();
+            connection.closeAll();
         }
 
         catch (Exception e){
