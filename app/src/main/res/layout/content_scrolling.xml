@@ -35,6 +35,18 @@
         android:layout_marginBottom="53dp"
         android:textColor="#ff0000" />
 
+
+    <Button android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/round_button2"
+        android:text="Voice-Mode"
+        android:id="@+id/voice_control"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:scrollHorizontally="false"
+        android:textSize="20dp"
+        android:textColor="#fff" />
+
     <Button android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/round_button2"

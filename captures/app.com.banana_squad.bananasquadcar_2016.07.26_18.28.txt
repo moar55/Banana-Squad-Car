@@ -1,0 +1,65 @@
+TASK app.com.banana_squad.bananasquadcar id=135
+  ACTIVITY app.com.banana_squad.bananasquadcar/.CreatePath 3a30964 pid=10463
+    Local Activity d08a7c9 State:
+      mResumed=true mStopped=false mFinished=false
+      mChangingConfigurations=false
+      mCurrentConfig={1.0 310mcc260mnc en_US ldltr sw411dp w689dp h387dp 420dpi nrml land finger -keyb/v/h -nav/h s.9}
+      mLoadersStarted=true
+      FragmentManager misc state:
+        mHost=android.app.Activity$HostCallbacks@e44dece
+        mContainer=android.app.Activity$HostCallbacks@e44dece
+        mCurState=5 mStateSaved=false mDestroyed=false
+    ViewRoot:
+      mAdded=true mRemoved=false
+      mConsumeBatchedInputScheduled=true
+      mConsumeBatchedInputImmediatelyScheduled=false
+      mPendingInputEventCount=0
+      mProcessInputEventsScheduled=false
+      mTraversalScheduled=true (barrier=5561)
+      android.view.ViewRootImpl$NativePreImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$ImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$NativePostImeInputStage: mQueueLength=0
+    Choreographer:
+      mFrameScheduled=true
+      mLastFrameTime=1007633 (17 ms ago)
+    View Hierarchy:
+      com.android.internal.policy.PhoneWindow$DecorView{89d1ef V.E...... R......D 0,0-1920,1080}
+        android.widget.LinearLayout{67f64fc V.E...... .......D 0,0-1810,1080}
+          android.view.ViewStub{beaf785 G.E...... ......I. 0,0-0,0 #10203a9 android:id/action_mode_bar_stub}
+          android.widget.FrameLayout{5419da V.E...... .......D 0,63-1810,1080 #1020002 android:id/content}
+            app.com.banana_squad.bananasquadcar.Draw{c4b9e0b V.ED..... ......ID 0,0-1810,1017}
+        android.view.View{ddbd4e8 V.ED..... ........ 1810,0-1920,1080 #1020030 android:id/navigationBarBackground}
+        android.view.View{4e88701 V.ED..... ........ 0,0-1810,63 #102002f android:id/statusBarBackground}
+    Looper (main, tid 1) {be9f9a6}
+      Message 0: { when=-16ms barrier=5561 }
+      Message 1: { when=+2s438ms what=0 obj=com.google.android.gms.common.internal.zzm$zzb@9140fe7 target=android.os.Handler }
+      (Total messages: 2, polling=false, quitting=false)
+
+  ACTIVITY app.com.banana_squad.bananasquadcar/.MainActivity 16ebb2f pid=10463
+    Local FragmentActivity a843647 State:
+      mCreated=truemResumed=false mStopped=true mReallyStopped=true
+      mLoadersStarted=true
+    FragmentManager misc state:
+      mHost=android.support.v4.app.FragmentActivity$HostCallbacks@e0d5794
+      mContainer=android.support.v4.app.FragmentActivity$HostCallbacks@e0d5794
+      mCurState=2 mStateSaved=true mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.PhoneWindow$DecorView{cd5923d I.E..... ... 0,0-1920,1080}
+        android.widget.LinearLayout{1ac0a32 V.E..... ... 0,0-1810,1080}
+          android.view.ViewStub{607c383 G.E..... ... 0,0-0,0 #10203a9 android:id/action_mode_bar_stub}
+          android.widget.FrameLayout{9325900 V.E..... ... 0,0-1810,1080}
+            android.support.v7.widget.FitWindowsLinearLayout{78e1539 V.E..... ... 0,0-1810,1080 #7f0c0057 app:id/action_bar_root}
+              android.support.v7.widget.ViewStubCompat{50c977e G.E..... ... 0,0-0,0 #7f0c0058 app:id/action_mode_bar_stub}
+              android.support.v7.widget.ContentFrameLayout{5f914df V.E..... ... 0,0-1810,1080 #1020002 android:id/content}
+                android.support.design.widget.CoordinatorLayout{2e4052c V.ED.... ... 0,0-1810,1080}
+                  android.support.design.widget.AppBarLayout{b1cbf5 V.E..... ... 0,63-1810,189}
+                    android.support.v7.widget.Toolbar{c56ad8a V.E..... ... 0,0-1810,126 #7f0c006b app:id/toolbar}
+                      android.widget.TextView{c841ffb V.ED.... ... 42,37-347,88}
+                      android.support.v7.widget.ActionMenuView{d224818 V.E..... ... 1705,0-1810,126}
+                        android.support.v7.widget.ActionMenuPresenter$OverflowMenuButton{4203271 VFED..C. ... 0,0-105,126}
+                  android.widget.RelativeLayout{57a1856 V.E..... ... 0,189-1810,1080}
+                    android.support.v7.widget.AppCompatButton{eac0d7 VFED..C. ... 42,147-436,541 #7f0c006c app:id/StartButton}
+                    android.support.v7.widget.AppCompatTextView{7ffcdc4 I.ED.... ... 752,296-1057,402 #7f0c006e app:id/Direction}
+                    android.support.v7.widget.AppCompatButton{23484ad IFED..C. ... 1374,147-1768,541 #7f0c006d app:id/ReverseButton}
+                    android.support.v7.widget.AppCompatButton{b9763e2 VFED..C. ... 778,147-1172,541 #7f0c006f app:id/drawPath}
+        android.view.View{2b09373 V.ED.... ... 1810,0-1920,1080 #1020030 android:id/navigationBarBackground}
